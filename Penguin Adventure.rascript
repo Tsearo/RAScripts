@@ -217,7 +217,7 @@ function achievement_secret(stage, stage_hex, item_name, item_address, points) {
 
 achievement_secret(6,0x6,"Blue Boots",0x216d,5) //Stage 6 - 297KM to get Bracelet - Get 5 fish on left
 achievement_secret(9,0x9,"Priest Robe",0x2171,5) //Stage 9 - Enter Bonus at 305 and keep flying as soon as you ascend
-achievement_secret(13,013,"Red Shoes",0x216e,5) // Stage 13 - Stay on left at start until around 580
+achievement_secret(13,0x13,"Red Shoes",0x216e,5) // Stage 13 - Stay on left at start until around 580
 achievement_secret(14,0x14,"Crossed Tiara",0x2170,5) // Stage 14 - In any crack press left then right
 achievement_secret(16,0x16,"Armor",0x2172,5) // Stage 16 - Pauase and press U R D L
 
@@ -296,7 +296,7 @@ achievement(
     trigger = trigger_game_start() && trigger_when(trigger_stage_win(0x24)) && trigger_when(prev(game_state()) == 7) && trigger_when(game_state() == 6) && never(game_state() == warp) && never(game_state() == title)
 )
 
-Not_Shortest = [2,3,4,5,7,8,10,11,14,16,17,19,20]
+Not_Shortest = [0x2,0x3,0x4,0x5,0x7,0x8,0x10,0x11,0x14,0x16,0x17,0x19,0x20]
 
 trigger = trigger_game_start() && trigger_when(trigger_stage_win(0x24))
     for i in Not_Shortest 
@@ -323,7 +323,7 @@ achievement(
 )
 
 achievement(
-    title = "Pentarou Would Be Proud", description = "Defeat a Freezaurus with the gun", points = 2,
+    title = "Pentarou Learned from the Best", description = "Defeat a Freezaurus with the gun", points = 2,
     trigger = game_state() == fighting_boss && has_gun() == 1 && trigger_when(prev(byte(0x253c)) == 19 && byte(0x253c) == 20) && check_cheats()
 )
 
@@ -376,9 +376,9 @@ achievement(
 
 achievement(
     title = "Drunken Penguin", description = "Reach the Freezaurus in Stage 3 without pressing left/right, bumping anything, falling in a crevice or dying [Continue OK]", points = 5,
-    trigger = trigger_when(prev(game_state()) == playing && game_state() == stage_victory) && current_stage() == 3 && 
+    trigger = trigger_when(prev(game_state()) == playing && game_state() == stage_victory) && 
     unless( once( (prev(current_lives()) < current_lives()) || current_speed() == 0 || bit2(0x2007) == 1 || (bit3(0x2007) == 1) ) ) && 
-    (always_true() || never(game_state() == title) && never(game_state() == game_over ))
+    (always_true() || never(game_state() == title) && never(game_state() == game_over ) && never(current_stage() != 3 ))
 )
 
 achievement(
